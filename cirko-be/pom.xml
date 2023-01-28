@@ -25,6 +25,7 @@
         <module>cirko-domain</module>
         <module>cirko-app</module>
         <module>cirko-rest-server</module>
+        <module>cirko-api-impl</module>
     </modules>
 
     <dependencyManagement>
