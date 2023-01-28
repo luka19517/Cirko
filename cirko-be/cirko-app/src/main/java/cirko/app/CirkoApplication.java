@@ -1,13 +1,13 @@
-package cirko.cirkoapp;
+package cirko.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CirkoAppApplication {
+public class CirkoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CirkoAppApplication.class, args);
+		SpringApplication.run(CirkoApplication.class, args);
 	}
 
 }

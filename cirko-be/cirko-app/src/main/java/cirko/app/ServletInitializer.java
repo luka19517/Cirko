@@ -1,4 +1,4 @@
-package cirko.cirkoapp;
+package cirko.app;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -8,7 +8,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(CirkoAppApplication.class);
+        return application.sources(CirkoApplication.class);
     }
 
 }
