@@ -36,3 +36,6 @@ build/
 /cirko-app/.mvn/
 /cirko-app/mvnw
 /cirko-app/mvnw.cmd
+/cirko/cirko-app/mvnw.cmd
+/cirko/cirko-app/mvnw
+/cirko/cirko-app/.mvn/
