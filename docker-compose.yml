@@ -1,0 +1,24 @@
+version: '3.4'
+
+configs:
+  create_script:
+    file: ./postgres/create_script.sql
+
+services:
+  postgres_db:
+    hostname: cirkopg
+    image: postgres:latest
+    container_name: cirko-pg
+    ports:
+      - "5433:5432"
+    networks:
+      - default
+    environment:
+      - "POSTGRES_PASSWORD=postgres"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_DB=cirko"
+    configs:
+      - source: create_script
+        target: /docker-entrypoint-initdb.d/create_script.sql
+        mode: 444
+    restart: always
