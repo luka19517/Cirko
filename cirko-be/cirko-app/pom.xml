@@ -9,6 +9,7 @@
     </parent>
     <artifactId>cirko-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>cirko-app</name>
     <description>App module for cirko</description>
 
