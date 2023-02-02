@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "backlogpriority", schema = "cirko")
+@Table(name = "backlogpriority")
 @Getter
 @Setter
 public class BacklogPriorityEntity {

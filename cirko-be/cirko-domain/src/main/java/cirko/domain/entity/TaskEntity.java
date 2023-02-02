@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "task", schema = "cirko")
+@Table(name = "task")
 @Getter
 @Setter
 public class TaskEntity {

@@ -511,3 +511,493 @@ ALTER TABLE ONLY cirko.tasklog
 -- PostgreSQL database dump complete
 --
 
+
+CREATE SCHEMA cirkojunit;
+
+
+ALTER SCHEMA cirkojunit OWNER TO pg_database_owner;
+
+--
+-- TOC entry 3377 (class 0 OID 0)
+-- Dependencies: 4
+-- Name: SCHEMA cirkojunit; Type: COMMENT; Schema: -; Owner: pg_database_owner
+--
+
+COMMENT ON SCHEMA cirkojunit IS 'standard cirkojunit schema';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 218 (class 1259 OID 32950)
+-- Name: attachment; Type: TABLE; Schema: cirkojunit; Owner: postgres
+--
+
+CREATE TABLE cirkojunit.attachment (
+    id bigint NOT NULL,
+    dataid bigint NOT NULL,
+    uploadeddatetime date NOT NULL,
+    uploadedby bigint NOT NULL,
+    type text NOT NULL,
+    content text NOT NULL
+);
+
+
+ALTER TABLE cirkojunit.attachment OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 32984)
+-- Name: attachment_id_seq; Type: SEQUENCE; Schema: cirkojunit; Owner: postgres
+--
+
+CREATE SEQUENCE cirkojunit.attachment_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cirkojunit.attachment_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3378 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: attachment_id_seq; Type: SEQUENCE OWNED BY; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER SEQUENCE cirkojunit.attachment_id_seq OWNED BY cirkojunit.attachment.id;
+
+
+--
+-- TOC entry 217 (class 1259 OID 32923)
+-- Name: backlog; Type: TABLE; Schema: cirkojunit; Owner: postgres
+--
+
+CREATE TABLE cirkojunit.backlog (
+    id bigint NOT NULL,
+    createddatetime date NOT NULL,
+    createdby bigint NOT NULL,
+    name text NOT NULL,
+    startdatetime date NOT NULL,
+    enddatetime date NOT NULL,
+    percentcompleted integer NOT NULL,
+    backlogpriority text NOT NULL,
+    active boolean NOT NULL
+);
+
+
+ALTER TABLE cirkojunit.backlog OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 32985)
+-- Name: backlog_id_seq; Type: SEQUENCE; Schema: cirkojunit; Owner: postgres
+--
+
+CREATE SEQUENCE cirkojunit.backlog_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cirkojunit.backlog_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3379 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: backlog_id_seq; Type: SEQUENCE OWNED BY; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER SEQUENCE cirkojunit.backlog_id_seq OWNED BY cirkojunit.backlog.id;
+
+
+--
+-- TOC entry 215 (class 1259 OID 32873)
+-- Name: backlogpriority; Type: TABLE; Schema: cirkojunit; Owner: postgres
+--
+
+CREATE TABLE cirkojunit.backlogpriority (
+    id text NOT NULL,
+    name text NOT NULL
+);
+
+
+ALTER TABLE cirkojunit.backlogpriority OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 32911)
+-- Name: task; Type: TABLE; Schema: cirkojunit; Owner: postgres
+--
+
+CREATE TABLE cirkojunit.task (
+    id bigint NOT NULL,
+    name text NOT NULL,
+    createddatetime date NOT NULL,
+    createdby bigint NOT NULL,
+    backlog bigint NOT NULL,
+    percentcompleted integer NOT NULL,
+    parent bigint NOT NULL,
+    startdatetime date NOT NULL,
+    enddatetime date NOT NULL,
+    active boolean NOT NULL
+);
+
+
+ALTER TABLE cirkojunit.task OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1259 OID 32988)
+-- Name: task_id_seq; Type: SEQUENCE; Schema: cirkojunit; Owner: postgres
+--
+
+CREATE SEQUENCE cirkojunit.task_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cirkojunit.task_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3380 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: task_id_seq; Type: SEQUENCE OWNED BY; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER SEQUENCE cirkojunit.task_id_seq OWNED BY cirkojunit.task.id;
+
+
+--
+-- TOC entry 219 (class 1259 OID 32962)
+-- Name: tasklog; Type: TABLE; Schema: cirkojunit; Owner: postgres
+--
+
+CREATE TABLE cirkojunit.tasklog (
+    id bigint NOT NULL,
+    task bigint NOT NULL,
+    title text NOT NULL,
+    description text NOT NULL,
+    createddatetime date NOT NULL,
+    createdby bigint NOT NULL,
+    timespent double precision NOT NULL
+);
+
+
+ALTER TABLE cirkojunit.tasklog OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 32987)
+-- Name: tasklog_id_seq; Type: SEQUENCE; Schema: cirkojunit; Owner: postgres
+--
+
+CREATE SEQUENCE cirkojunit.tasklog_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cirkojunit.tasklog_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3381 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: tasklog_id_seq; Type: SEQUENCE OWNED BY; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER SEQUENCE cirkojunit.tasklog_id_seq OWNED BY cirkojunit.tasklog.id;
+
+
+--
+-- TOC entry 214 (class 1259 OID 32864)
+-- Name: user; Type: TABLE; Schema: cirkojunit; Owner: postgres
+--
+
+CREATE TABLE cirkojunit."user" (
+    id bigint NOT NULL,
+    username text NOT NULL,
+    password text NOT NULL,
+    registrationdatetime date NOT NULL
+);
+
+
+ALTER TABLE cirkojunit."user" OWNER TO postgres;
+
+--
+-- TOC entry 222 (class 1259 OID 32986)
+-- Name: user_id_seq; Type: SEQUENCE; Schema: cirkojunit; Owner: postgres
+--
+
+CREATE SEQUENCE cirkojunit.user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cirkojunit.user_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3382 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER SEQUENCE cirkojunit.user_id_seq OWNED BY cirkojunit."user".id;
+
+
+--
+-- TOC entry 3365 (class 0 OID 32950)
+-- Dependencies: 218
+-- Data for Name: attachment; Type: TABLE DATA; Schema: cirkojunit; Owner: postgres
+--
+
+COPY cirkojunit.attachment (id, dataid, uploadeddatetime, uploadedby, type, content) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3364 (class 0 OID 32923)
+-- Dependencies: 217
+-- Data for Name: backlog; Type: TABLE DATA; Schema: cirkojunit; Owner: postgres
+--
+
+COPY cirkojunit.backlog (id, createddatetime, createdby, name, startdatetime, enddatetime, percentcompleted, backlogpriority, active) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3362 (class 0 OID 32873)
+-- Dependencies: 215
+-- Data for Name: backlogpriority; Type: TABLE DATA; Schema: cirkojunit; Owner: postgres
+--
+
+COPY cirkojunit.backlogpriority (id, name) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3363 (class 0 OID 32911)
+-- Dependencies: 216
+-- Data for Name: task; Type: TABLE DATA; Schema: cirkojunit; Owner: postgres
+--
+
+COPY cirkojunit.task (id, name, createddatetime, createdby, backlog, percentcompleted, parent, startdatetime, enddatetime, active) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3366 (class 0 OID 32962)
+-- Dependencies: 219
+-- Data for Name: tasklog; Type: TABLE DATA; Schema: cirkojunit; Owner: postgres
+--
+
+COPY cirkojunit.tasklog (id, task, title, description, createddatetime, createdby, timespent) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3361 (class 0 OID 32864)
+-- Dependencies: 214
+-- Data for Name: user; Type: TABLE DATA; Schema: cirkojunit; Owner: postgres
+--
+
+COPY cirkojunit."user" (id, username, password, registrationdatetime) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3383 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: attachment_id_seq; Type: SEQUENCE SET; Schema: cirkojunit; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cirkojunit.attachment_id_seq', 1, false);
+
+
+--
+-- TOC entry 3384 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: backlog_id_seq; Type: SEQUENCE SET; Schema: cirkojunit; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cirkojunit.backlog_id_seq', 1, false);
+
+
+--
+-- TOC entry 3385 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: task_id_seq; Type: SEQUENCE SET; Schema: cirkojunit; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cirkojunit.task_id_seq', 1, false);
+
+
+--
+-- TOC entry 3386 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: tasklog_id_seq; Type: SEQUENCE SET; Schema: cirkojunit; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cirkojunit.tasklog_id_seq', 1, false);
+
+
+--
+-- TOC entry 3387 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: cirkojunit; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cirkojunit.user_id_seq', 1, false);
+
+
+--
+-- TOC entry 3198 (class 2606 OID 32872)
+-- Name: user ak_user1; Type: CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit."user"
+    ADD CONSTRAINT ak_user1 UNIQUE (username);
+
+
+--
+-- TOC entry 3208 (class 2606 OID 32956)
+-- Name: attachment attachment_pkey; Type: CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit.attachment
+    ADD CONSTRAINT attachment_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3206 (class 2606 OID 32929)
+-- Name: backlog backlog_pkey; Type: CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit.backlog
+    ADD CONSTRAINT backlog_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3202 (class 2606 OID 32879)
+-- Name: backlogpriority backlogpriority_pkey; Type: CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit.backlogpriority
+    ADD CONSTRAINT backlogpriority_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3204 (class 2606 OID 32917)
+-- Name: task task_pkey; Type: CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit.task
+    ADD CONSTRAINT task_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3210 (class 2606 OID 32968)
+-- Name: tasklog tasklog_pkey; Type: CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit.tasklog
+    ADD CONSTRAINT tasklog_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3200 (class 2606 OID 32870)
+-- Name: user user_pkey; Type: CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit."user"
+    ADD CONSTRAINT user_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3216 (class 2606 OID 32957)
+-- Name: attachment attachment_fk1; Type: FK CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit.attachment
+    ADD CONSTRAINT attachment_fk1 FOREIGN KEY (uploadedby) REFERENCES cirkojunit."user"(id);
+
+
+--
+-- TOC entry 3214 (class 2606 OID 32930)
+-- Name: backlog fk_backlog1; Type: FK CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit.backlog
+    ADD CONSTRAINT fk_backlog1 FOREIGN KEY (createdby) REFERENCES cirkojunit."user"(id);
+
+
+--
+-- TOC entry 3215 (class 2606 OID 32935)
+-- Name: backlog fk_backlog2; Type: FK CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit.backlog
+    ADD CONSTRAINT fk_backlog2 FOREIGN KEY (backlogpriority) REFERENCES cirkojunit.backlogpriority(id);
+
+
+--
+-- TOC entry 3211 (class 2606 OID 32918)
+-- Name: task fk_task1; Type: FK CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit.task
+    ADD CONSTRAINT fk_task1 FOREIGN KEY (createdby) REFERENCES cirkojunit."user"(id);
+
+
+--
+-- TOC entry 3212 (class 2606 OID 32940)
+-- Name: task fk_task2; Type: FK CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit.task
+    ADD CONSTRAINT fk_task2 FOREIGN KEY (backlog) REFERENCES cirkojunit.backlog(id) NOT VALID;
+
+
+--
+-- TOC entry 3213 (class 2606 OID 32945)
+-- Name: task fk_task3; Type: FK CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit.task
+    ADD CONSTRAINT fk_task3 FOREIGN KEY (parent) REFERENCES cirkojunit.task(id) NOT VALID;
+
+
+--
+-- TOC entry 3217 (class 2606 OID 32974)
+-- Name: tasklog fk_tasklog2; Type: FK CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit.tasklog
+    ADD CONSTRAINT fk_tasklog2 FOREIGN KEY (createdby) REFERENCES cirkojunit."user"(id);
+
+
+--
+-- TOC entry 3218 (class 2606 OID 32969)
+-- Name: tasklog tasklog_fk1; Type: FK CONSTRAINT; Schema: cirkojunit; Owner: postgres
+--
+
+ALTER TABLE ONLY cirkojunit.tasklog
+    ADD CONSTRAINT tasklog_fk1 FOREIGN KEY (task) REFERENCES cirkojunit.task(id);
+
+
+-- Completed on 2023-01-29 16:16:13
+
+--
+-- PostgreSQL database dump complete
+--
+
+

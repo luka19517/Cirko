@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "backlog", schema = "cirko")
+@Table(name = "backlog")
 @Getter
 @Setter
 public class BacklogEntity {

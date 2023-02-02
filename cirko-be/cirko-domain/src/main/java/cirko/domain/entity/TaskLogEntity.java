@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "tasklog", schema = "cirko")
+@Table(name = "tasklog")
 @Getter
 @Setter
 public class TaskLogEntity {

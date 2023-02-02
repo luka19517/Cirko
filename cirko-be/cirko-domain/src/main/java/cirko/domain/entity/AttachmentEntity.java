@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "attachment", schema = "cirko")
+@Table(name = "attachment")
 @Getter
 @Setter
 public class AttachmentEntity {
